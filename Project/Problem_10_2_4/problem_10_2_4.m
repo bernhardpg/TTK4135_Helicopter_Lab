@@ -58,7 +58,7 @@ P1 = 2*q;                                % Weight on input
 % function Q = gen_q(Q1,P1,N,M)
 Q = gen_q(Q1,P1,N,M);                                  % Generate Q, hint: gen_q
 c = zeros(size(Q,1),1);                                  % Generate c, this is the linear constant term in the QP
-% c = [-2\lambda_f 0..........0]
+% c = [-2*lambda_f 0..........0]
 %% Generate system matrixes for linear model
 % function A = gen_aeq(A1,B1,N,mx,mu)
 Aeq = gen_aeq(A1,B1,N,mx,mu);            % Generate A, hint: gen_aeq
