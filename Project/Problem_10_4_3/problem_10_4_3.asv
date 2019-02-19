@@ -155,15 +155,5 @@ rotors would depend on the pitch, as a high pitch angle would make the
 rotors contribute less to the elevation. As this is not compensated for in
 the model, the pitch setpoint needed to achieve the optimal trajectory will
 be underestimated. This can clearly be seen in the results, as the
-helicopter moves far less than 180 degrees when tested in reality (without
-the optimal trajectory feedback), when it, according to calculations based
-on the model, should have travelled a full 180 degrees. It should also be noted that some error is of
-course to be expected, as there are other factors (like friction) which
-have also been neglected.
-
-This could have been improved by compensating for the pitch in the
-equations in the model. For example by introducing a simple cosine
-decomposition dependant on the pitch before linearizing the system.
-(Other things??)
+helicopter moves far less than 180 degrees when tested in reality (wihto).
 %}
-
