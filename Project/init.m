@@ -8,6 +8,11 @@
 close all;
 clc;
 
+% Set default interpreter as Latex
+set(groot, 'defaultTextInterpreter', 'latex');
+set(groot, 'defaultAxesTickLabelInterpreter', 'latex');
+set(groot, 'defaultLegendInterpreter', 'latex');
+
 % The encoder for travel for Helicopter 2 is different from the rest.
 travel_gain = -2; %
 

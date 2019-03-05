@@ -1,4 +1,12 @@
-run ('../Problem_10_2_4/problem_10_2_4.m');
+clear all; close all; clc;
+
+addpath('../');
+addpath('../help_functions');
+addpath('../Problem_10_2_4');
+
+init;
+problem_10_2_4;
+
 %% LQ state-feedback
 q_1 = 100; % Travel
 q_2 = 10; % Travel rate
@@ -11,3 +19,4 @@ Q_lq = diag([q_1 q_2 q_3 q_4]);
 R_lq = r_1;
 
 [K_lq,S_lq,e_lq] = dlqr(A1,B1,Q_lq,R_lq);
+
