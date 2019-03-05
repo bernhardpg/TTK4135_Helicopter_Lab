@@ -5,7 +5,7 @@ problem_10_4_3;
 load('data_wof.mat');
 
 figure
-plot(t,u1)
+plot(t,x3)
 hold on;
 plot(simout(1,:),simout(4,:))
 title('Optimal trajectory without feedback - Pitch $p$')
@@ -29,12 +29,13 @@ savefig('problem_10_4_plot_travel');
 e_constraint = nonlincon_lambda(simout(2,:));
 
 figure
-plot(t,u2)
+plot(t,x5)
 hold on;
 plot(simout(1,:),[simout(6,:)' e_constraint]);
 title('Optimal trajectory without feedback - Elevation $e$')
 ylabel('Elevation angle [rad]');
 xlabel('Time [s]');
-legend({'Elevation reference $\lambda_c$', 'Elevation measured $\lambda$','Constraint'});
+ylim([-0.5 0.25])
+legend({'Elevation reference $e_c$', 'Elevation measured $e$', 'Lower elevation constraint'});
 saveas(gcf, 'problem_10_4_plot_elevation','eps');
 savefig('problem_10_4_plot_elevation');

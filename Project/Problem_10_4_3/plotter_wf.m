@@ -5,10 +5,10 @@ problem_10_4_3;
 load('data_wf.mat');
 
 figure
-plot(t,u1)
+plot(t,x3)
 hold on;
 plot(simout(1,:),simout(4,:))
-title('Optimal trajectory without feedback - Pitch $p$')
+title('Optimal trajectory with feedback - Pitch $p$')
 ylabel('Pitch angle [rad]');
 xlabel('Time [s]');
 legend({'Pitch reference $p_c$', 'Pitch measured $p$'});
@@ -19,7 +19,7 @@ figure
 plot(t,x1)
 hold on;
 plot(simout(1,:),simout(2,:))
-title('Optimal trajectory without feedback - Travel $\lambda$')
+title('Optimal trajectory with feedback - Travel $\lambda$')
 ylabel('Travel angle [rad]');
 xlabel('Time [s]');
 legend({'Travel reference $\lambda_c$', 'Travel measured $\lambda$'});
@@ -32,9 +32,10 @@ figure
 plot(t,x5)
 hold on;
 plot(simout(1,:),[simout(6,:)' e_constraint]);
-title('Optimal trajectory without feedback - Elevation $e$')
+title('Optimal trajectory with feedback - Elevation $e$')
 ylabel('Elevation angle [rad]');
 xlabel('Time [s]');
-legend({'Elevation reference $e_c$', 'Elevation measured $e$','Constraint'});
+ylim([-0.5 0.25])
+legend({'Elevation reference $e_c$', 'Elevation measured $e$','Lower elevation contraint'});
 saveas(gcf, 'problem_10_4_wf_plot_elevation','eps');
 savefig('problem_10_4_wf_plot_elevation');

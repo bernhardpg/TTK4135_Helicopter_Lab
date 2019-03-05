@@ -32,7 +32,7 @@ x6_0 = 0;                               % e_dot
 x0 = [x1_0 x2_0 x3_0 x4_0 x5_0 x6_0]';  % Initial values
 
 global N;
-N = 40; % 40 steps of 0.25s = 10s
+N = 60; % 40 steps of 0.25s = 10s
 
 M = N; % Number of input steps
 mx = size(A_d,2); % Number of states (number of columns in A)
@@ -75,7 +75,7 @@ Q1(5,5) = 0;
 Q1(6,6) = 0;
 
 q_1 = 1;
-q_2 = 0.1;
+q_2 = 1;
 P1 = 2*diag([q_1 q_2]);                                % Weight on input
 
 % function Q = gen_q(Q1,P1,N,M)
@@ -96,10 +96,10 @@ q_1 = 5; % Travel
 q_2 = 1; % Travel rate
 q_3 = 1; % Pitch
 q_4 = 0.5; % Pitch rate
-q_5 = 30; % Elevation
-q_6 = 10; % Elevation rate
+q_5 = 10; % Elevation
+q_6 = 30; % Elevation rate
 
-r_1 = 0.1; % Pitch setpoint (input)
+r_1 = 1; % Pitch setpoint (input)
 r_2 = 0.1; % Elevation setpoint (input)
 Q_lq = diag([q_1 q_2 q_3 q_4 q_5 q_6]);
 R_lq = diag([r_1 r_2]);

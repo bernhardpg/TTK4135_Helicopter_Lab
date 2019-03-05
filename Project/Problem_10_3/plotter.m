@@ -5,7 +5,7 @@ problem_10_3;
 load('data.mat');
 
 figure
-plot(t,u)
+plot(t,x3)
 hold on;
 plot(simout(1,:),simout(3,:) / 180 * pi)
 title('Optimal trajectory with feedback - Pitch $p$')
