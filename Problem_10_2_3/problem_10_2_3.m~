@@ -2,7 +2,7 @@
 % Hints/template for problem 2.
 % Updated spring 2018, Andreas L. Fl�ten
 
-%% System
+%% Initalize system
 % Discrete time system model. x = [lambda r p p_dot]'
 delta_t	= 0.25;                    % sampling time
 A1 = [0 1 0 0;                     % A1 = (TA + I)
@@ -12,8 +12,11 @@ A1 = [0 1 0 0;                     % A1 = (TA + I)
   
 B1 = [0 0 0 K_1*K_pp]' * delta_t;  % B1 = TB;
 
+% Number of states and inputs
+mx = size(A1,2);                   % Number of states
+mu = size(B1,2);                   % Number of inputs
 
-%% Initial values
+% Initial values
 x1_0 = pi;                         % Lambda
 x2_0 = 0;                          % r
 x3_0 = 0;                          % p
@@ -23,14 +26,10 @@ x0 = [x1_0 x2_0 x3_0 x4_0]';       % Initial values
 % Time horizon and initialization
 N  = 100;                          % Time horizon for states
 M  = N;                            % Time horizon for inputs
-% Number of states and inputs
-mx = size(A1,2);                   % Number of states
-mu = size(B1,2);                   % Number of inputs
-
 z  = zeros(N*mx+M*mu,1);           % Initialize z for time horizon
 z0 = z;                            % Initial value for optimization
 
-%% Bounds
+% Bounds
 ul 	    = -30*pi/180;              % Lower bound on control
 uu 	    = -ul;                     % Upper bound on control
 
@@ -39,8 +38,7 @@ xu      = Inf*ones(mx,1);          % Upper bound on states (no bound)
 xl(3)   = ul;                      % Lower bound on state x3
 xu(3)   = uu;                      % Upper bound on state x3
 
-%% Constraints
-% Generate constraints on measurements and inputs
+%% Generate constraints on measurements and inputs
 [vlb,vub]       = gen_constraints(N,M,xl,xu,ul,uu); 
 vlb(N*mx+M*mu)  = 0;               % Set last input to zero
 vub(N*mx+M*mu)  = 0;               % Set last input to zero
@@ -58,7 +56,7 @@ P1 = q;                            % Weight on input
 Q = gen_q(Q1,P1,N,M);              % Generate Q
 c = zeros(size(Q,1),1);            % Generate c
 
-% Generate equality constraints
+%% Generate system matrixes for linear model
 Aeq = gen_aeq(A1,B1,N,mx,mu);      % Generate Aeq
 beq = zeros(size(Aeq,1),1);        % Generate beq
 beq(1:mx) = A1 * x0;
@@ -66,17 +64,24 @@ beq(1:mx) = A1 * x0;
 %% Solve QP problem with linear model
 [z,lambda] = quadprog(Q,c,[],[],Aeq,beq,vlb,vub,x0);
 
+% Calculate objective value
+phi1 = 0.0;
+PhiOut = zeros(N*mx+M*mu,1);
+for i=1:N*mx+M*mu
+  phi1=phi1+Q(i,i)*z(i)*z(i);
+  PhiOut(i) = phi1;
+end
+
 %% Extract control inputs and states
-u  = [z(N*mx+1:N*mx+M*mu);z(N*mx+M*mu)];
+u  = [z(N*mx+1:N*mx+M*mu);z(N*mx+M*mu)]; % Control input from solution
 
-x1 = [x0(1);z(1:mx:N*mx)];          
-x2 = [x0(2);z(2:mx:N*mx)];              
-x3 = [x0(3);z(3:mx:N*mx)];               
-x4 = [x0(4);z(4:mx:N*mx)];               
+x1 = [x0(1);z(1:mx:N*mx)];          % State x1 from solution
+x2 = [x0(2);z(2:mx:N*mx)];          % State x2 from solution
+x3 = [x0(3);z(3:mx:N*mx)];          % State x3 from solution
+x4 = [x0(4);z(4:mx:N*mx)];          % State x4 from solution
 
-%% Add zero-padding
 num_variables = 5/delta_t;
-zero_padding = zeros(num_variables,1);   
+zero_padding = zeros(num_variables,1);
 unit_padding  = ones(num_variables,1);
 
 u   = [zero_padding; u; zero_padding];

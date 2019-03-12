@@ -10,11 +10,9 @@ init;
 q = 1;
 problem_10_2_3;
 
-%% Create u input matrix
+%% Create matrices to be used in Simulink
 
 t = 0:delta_t:delta_t*(length(u)-1);
 
-u_star = [t' u];
-x_star = [t' x1 x2 x3 x4];
-
-%run('helicopter.slx')
+u_star = [t' u];           
+x_star = [t' x1 x2 x3 x4];  
