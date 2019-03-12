@@ -1,10 +1,9 @@
 % Initialization for the helicopter assignment in TTK4135.
 % Run this file before you execute QuaRC -> Build.
 
-% Updated spring 2018, Andreas L. Flåten
+% Updated spring 2018, Andreas L. Flï¿½ten
 % Updated Spring 2019, Joakim R. Andersen
 
-%clear all;
 close all;
 clc;
 
@@ -30,7 +29,7 @@ J_t = 2 * m_h * l_a *l_a;         % Moment of interia for travel
 
 % Identified voltage sum and difference
 V_s_eq = 6.0; % Identified equilibrium voltage sum.
-V_d_eq = 0.8; % Identified equilibrium voltage difference. Updated Spring 2019. Old: 0.4
+V_d_eq = 0.8; % Identified equilibrium voltage difference.
 
 % Model parameters
 K_p = m_g*9.81; % Force to lift the helicopter from the ground.
