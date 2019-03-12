@@ -1,6 +1,5 @@
 function [c,ceq] = nonlincon(x)
     % Inequality constraint
-    % e_k >= alpha*exp(-beta(lambda_k-lambda_t)^2);
     global N;
     
     alpha = 0.2;
@@ -8,7 +7,8 @@ function [c,ceq] = nonlincon(x)
     lambda_t = 2*pi/3;
     c = zeros(N,1);
     for k = 1:N
-        c(k) = alpha*exp(-beta*(x((k-1)*6 + 1)-lambda_t)^2)-x((k-1)*6 + 5);
+        c(k) = alpha*exp(-beta*(x((k-1)*6 + 1) ...
+        -lambda_t)^2)-x((k-1)*6 + 5);
     end
     ceq = [];
 end
