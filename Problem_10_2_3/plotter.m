@@ -18,7 +18,7 @@ for iteration = 1:length(q_values)
     legend({'Pitch reference $u = p_c$', 'Estimated pitch $p$'});
     xlabel('Time [s]'),ylabel('Pitch angle [rad]');
     title(['Optimal trajectory with weight q = ', num2str(q)])
-    saveas(gcf, ['problem_10_2_3_plot_', num2str(iteration)], 'eps');
+    saveas(gcf, ['problem_10_2_3_plot_', num2str(iteration)], 'epsc');
     savefig(['problem_10_2_3_plot_', num2str(iteration)]);
     
     close all;
