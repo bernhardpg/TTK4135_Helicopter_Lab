@@ -20,7 +20,6 @@ for iteration = 1:length(q_values)
     xlabel('Time [s]'),ylabel('Pitch angle [rad]');
     title(['Optimal trajectory with weight q = ', num2str(q)])
 
-    
 end
 saveas(gcf, ['problem_10_2_3_plot_'], 'epsc');
 savefig(['problem_10_2_3_plot_']);
